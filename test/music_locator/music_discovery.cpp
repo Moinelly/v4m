@@ -25,8 +25,18 @@ recursiveDiscovery(QDir &startDir, const QStringList &music_file_filters, QStrin
    //
    // read the music files in the current directory first...
    //
-   for (auto music_file_name : startDir.entryList())
-     result += (startDir.path() + "/" + music_file_name);
+//   for (auto music_file_name : startDir.entryList())
+//     result += (startDir.path() + "/" + music_file_name);
+
+
+   //Tested this function in MAC, Ubuntu and Windows, it's working
+
+   QStringList list = startDir.entryList(QDir::NoFilter, QDir::NoSort);
+   for (int i = 0; i < list.size(); ++i)
+   {
+      QFileInfo fInfo = list.at(i);
+      QString fPath = fInfo.absoluteFilePath();
+      qDebug() << "# " << i << fPath;   }
 
    //
    // and then recurse in the subdirectories
